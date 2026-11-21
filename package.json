@@ -59,6 +59,14 @@
     "typecheck": "tsc --noEmit"
   },
   "license": "MIT",
+  "author": {
+    "name": "ArseniyX",
+    "url": "https://github.com/ArseniyX"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArseniyX/dto-kit.git"
+  },
   "devDependencies": {
     "@nestjs/common": "^12.6.0",
     "@nestjs/core": "^12.6.0",
