@@ -1,5 +1,5 @@
 import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
-import { extname, join, relative, resolve } from "node:path";
+import { extname, join, relative, resolve, sep } from "node:path";
 import { transformSource } from "./transform.js";
 
 const SKIP_DIRS = new Set(["node_modules", "dist", "build", "coverage", ".git", ".next", ".turbo", ".generated"]);
@@ -53,7 +53,7 @@ export function run(argv: string[], log: (line: string) => void = console.log, c
       const source = readFileSync(file, "utf8");
       if (!/class-validator|class-transformer|@nestjs\/common/.test(source)) continue;
       const result = transformSource(source, { nest: flags.has("--nest") });
-      const rel = relative(cwd, file) || file;
+      const rel = (relative(cwd, file) || file).split(sep).join("/"); // same output on every OS
       if (!result.changed && !result.warnings.length) continue;
       if (result.changed) {
         changedFiles.push(rel);
